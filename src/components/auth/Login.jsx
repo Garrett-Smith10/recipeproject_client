@@ -7,7 +7,7 @@ export const Login = ({ setToken }) => {
   const username = useRef()
   const password = useRef()
   const navigate = useNavigate()
-  const [isUnsuccessful, setisUnsuccessful] = useState(false)
+  const [isUnsuccessful, setIsUnsuccessful] = useState(false)
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -18,21 +18,22 @@ export const Login = ({ setToken }) => {
     }
     
     loginUser(user).then(res => {
-      let parsedRes = JSON.parse(res);
-      if (parsedRes?.valid) {
-        setToken(parsedRes.token)
-        navigate("/")
+      if (res.valid) {  // Access the property directly, no need to parse JSON
+        setToken(res.token);
+        navigate("/");
+      } else {
+        setIsUnsuccessful(true);
       }
-      else {
-        setisUnsuccessful(true)
-      }
-    })
-  }
+    }).catch(error => {
+      console.error('Login failed:', error);
+      setIsUnsuccessful(true);
+    });
+  };
 
   return (
     <section className="columns is-centered">
       <form className="column is-two-thirds" onSubmit={handleLogin}>
-        <h1 className="title">Rare Publishing</h1>
+        <h1 className="title">Strudel</h1>
         <p className="subtitle">Please sign in</p>
 
         <div className="field">
