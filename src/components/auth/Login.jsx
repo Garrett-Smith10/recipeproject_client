@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 
 
+// eslint-disable-next-line react/prop-types
 export const Login = ({ setToken }) => {
   const username = useRef()
   const password = useRef()
@@ -10,15 +11,16 @@ export const Login = ({ setToken }) => {
   const [isUnsuccessful, setIsUnsuccessful] = useState(false)
 
   const handleLogin = (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
+  
     const user = {
       username: username.current.value,
       password: password.current.value
-    }
-    
+    };
+  
     loginUser(user).then(res => {
-      if (res.valid) {  // Access the property directly, no need to parse JSON
+      if (res.token) {
+        localStorage.setItem('auth_token', res.token); // Check if `token` exists
         setToken(res.token);
         navigate("/");
       } else {
@@ -29,6 +31,7 @@ export const Login = ({ setToken }) => {
       setIsUnsuccessful(true);
     });
   };
+  
 
   return (
     <section className="columns is-centered">
