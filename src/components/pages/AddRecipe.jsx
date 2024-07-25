@@ -10,6 +10,7 @@ export const RecipeForm = ({ onSubmit }) => {
     { ingredient: "", measurement_unit: "", quantity: "" },
   ]);
   const [measurementUnits, setMeasurementUnits] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const token = localStorage.getItem('auth_token'); // Retrieve token from local storage
@@ -40,7 +41,8 @@ export const RecipeForm = ({ onSubmit }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("auth_token");
-
+    
+    console.log(`Token: ${token}`);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("image", image);
@@ -51,7 +53,7 @@ export const RecipeForm = ({ onSubmit }) => {
     formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
-        const response = await fetch("http://localhost:8000/recipes/", {
+        const response = await fetch("http://localhost:8000/recipes", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,7 +72,6 @@ export const RecipeForm = ({ onSubmit }) => {
         console.error("Error:", error);
       }
     };
-
   return (
     <form onSubmit={handleSubmit}>
       <label>
