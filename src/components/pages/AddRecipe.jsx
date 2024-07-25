@@ -40,38 +40,46 @@ export const RecipeForm = ({ onSubmit }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+  
     const token = localStorage.getItem("auth_token");
+  
+    if (!token) {
+      console.error("No auth token found.");
+      return;
+    }
+
     
-    console.log(`Token: ${token}`);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("image", image);
     formData.append("cooking_instructions", cookingInstructions);
-    formData.append("public", false); // Set public to false by default
-
+    formData.append("public", false);
+    
     // Append each ingredient as a JSON string
     formData.append("ingredients", JSON.stringify(ingredients));
-
+    
     try {
-        const response = await fetch("http://localhost:8000/recipes", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        });
+      const response = await fetch("http://localhost:8000/recipes", {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${token}`, // Ensure this line is correctly setting the Authorization header
+        },
+        body: formData, // Convert FormData to JSON
+      });
+    
   
-        if (response.ok) {
-          const result = await response.json();
-          onSubmit(result); // Trigger any callback to handle post-submit actions
-          navigate("/myrecipes"); // Navigate to MyRecipes
-        } else {
-          console.error("Failed to submit recipe");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
+  
+      const result = await response.json();
+      onSubmit(result); // Handle success
+      navigate("/myrecipes"); // Navigate to MyRecipes
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
