@@ -1,39 +1,13 @@
 import { useState, useEffect } from "react";
+import { fetchRecipes } from "../../services/recipeServices.js";
 
-const MyRecipes = () => {
+export const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      if (!token) {
-        console.error("No auth token found");
-        return;
-      }
-
-      console.log("Auth token:", token); // Log the token
-
-      try {
-        const response = await fetch("http://localhost:8000/recipes", {
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setRecipes(data);
-        } else {
-          console.error(`Failed to fetch recipes: ${response.status} ${response.statusText}`);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchRecipes();
-  }, [token]); // Add token as a dependency
+    fetchRecipes(setRecipes, token);
+  }, [token, setRecipes]);
 
    return (
     <div>
@@ -50,4 +24,3 @@ const MyRecipes = () => {
   );
 };
 
-export default MyRecipes;

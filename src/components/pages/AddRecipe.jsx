@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllMeasurementUnits } from "../../services/measurementService.js";
+import { createRecipe } from "../../services/recipeServices.js";
 
 export const RecipeForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
@@ -41,44 +42,21 @@ export const RecipeForm = ({ onSubmit }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const token = localStorage.getItem("auth_token");
+    const postData = {
+      name,
+      image,
+      cooking_instructions: cookingInstructions,
+      public: false,
+      ingredients: JSON.stringify(ingredients),
+    };
   
-    if (!token) {
-      console.error("No auth token found.");
-      return;
-    }
-
-    
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("image", image);
-    formData.append("cooking_instructions", cookingInstructions);
-    formData.append("public", false);
-    
-    // Append each ingredient as a JSON string
-    formData.append("ingredients", JSON.stringify(ingredients));
-    
-    try {
-      const response = await fetch("http://localhost:8000/recipes", {
-        method: "POST",
-        headers: {
-          Authorization: `Token ${token}`, // Ensure this line is correctly setting the Authorization header
-        },
-        body: formData, // Convert FormData to JSON
-      });
-    
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    createRecipe(postData).then(() => {
+      if (onSubmit && typeof onSubmit === 'function') {
+        onSubmit();
       }
-  
-      const result = await response.json();
-      onSubmit(result); // Handle success
-      navigate("/myrecipes"); // Navigate to MyRecipes
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+      navigate("/myrecipes");
+    });
+  }
 
   return (
     <form onSubmit={handleSubmit}>

@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login.jsx"
 import { Register } from "../components/auth/Register.jsx"
 import { Authorized } from "./Authorized.jsx"
-import Home from "../components/pages/Home.jsx"
-import MyRecipes from "../components/pages/MyRecipes.jsx"
+import { Home } from "../components/pages/Home.jsx"
+import { MyRecipes } from "../components/pages/MyRecipes.jsx"
 import { RecipeForm } from "../components/pages/AddRecipe.jsx"
 
 export const ApplicationViews = ({ token, setToken }) => {
