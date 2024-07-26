@@ -15,31 +15,29 @@ export const loginUser = (user) => {
     } else {
       throw new Error('Network response was not ok');
     }
+  }).catch(error => {
+    console.error('Login error:', error);
+    return { valid: false }; // Ensure consistent format in case of error
   });
 };
-  
-  export const registerUser = (newUser) => {
-    return fetch("http://localhost:8000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(newUser)
-    })
+
+export const registerUser = (newUser) => {
+  return fetch("http://localhost:8000/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(newUser)
+  })
    .then(response => {
       if (response.status === 201) {
-        // Handle success without content, e.g., update UI or local storage
-        console.log('Registration successful');
-        // Optionally, return a resolved promise with a custom value indicating success
-        return Promise.resolve({success: true});
+        return response.json(); // Proceed with parsing JSON if the response is not 204
       } else if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json(); // Proceed with parsing JSON if the response is not 204
     })
    .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
-      // Handle the error appropriately, perhaps by setting an error state in your component
     });
-  }
+}
