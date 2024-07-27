@@ -1,12 +1,8 @@
-export const getAllMeasurementUnits = async (token) => {
-    if (!token) {
-        throw new Error('No authentication token found');
-    }
-
+export const getAllMeasurementUnits = async () => {
     try {
         const response = await fetch('http://localhost:8000/measurement_units', {
             headers: {
-                'Authorization': `Token ${token}`
+                'Authorization': `Token ${localStorage.getItem('auth_token')}`
             }
         });
 

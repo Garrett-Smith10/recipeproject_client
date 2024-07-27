@@ -1,7 +1,7 @@
-export const fetchRecipes = async (setRecipes, token) => {
+export const fetchRecipes = async (setRecipes) => {
   fetch("http://localhost:8000/recipes", {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Token ${localStorage.getItem("auth_token")}`,
       "Content-Type": "application/json",
     },
   }).then(async (response) => {
@@ -9,6 +9,19 @@ export const fetchRecipes = async (setRecipes, token) => {
     setRecipes(data);
   });
 };
+
+export const fetchSingleRecipe = async (setRecipe, id) => {
+  fetch(`http://localhost:8000/recipes/${id}`, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem('auth_token')}`,
+      "Content-Type": "application/json",
+    },
+  }).then(async (response) => {
+    const data = await response.json();
+    setRecipe(data);
+  });
+};
+
 
 export async function createRecipe(postData) {
   const token = localStorage.getItem("auth_token");
@@ -25,3 +38,5 @@ export async function createRecipe(postData) {
   });
   return await response.json();
 }
+
+
