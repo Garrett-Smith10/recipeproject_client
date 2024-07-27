@@ -5,6 +5,7 @@ import { Authorized } from "./Authorized.jsx"
 import { Home } from "../components/pages/Home.jsx"
 import { MyRecipes } from "../components/pages/MyRecipes.jsx"
 import { RecipeForm } from "../components/pages/AddRecipe.jsx"
+import { RecipeDetails } from "../components/pages/RecipeDetails.jsx"
 
 export const ApplicationViews = ({ token, setToken }) => {
   
@@ -17,6 +18,7 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/" element={<Home />} />
       <Route path="/myrecipes" element={<MyRecipes />} />
       <Route path="/addrecipe" element={<RecipeForm />} />
+      <Route path="/myrecipes/:id" element={<RecipeDetails />} />
       
         
         

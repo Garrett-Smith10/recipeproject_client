@@ -14,11 +14,7 @@ export const RecipeForm = ({ onSubmit }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token'); // Retrieve token from local storage
-
-    if (token) {
-      getAllMeasurementUnits(token).then(setMeasurementUnits);
-    }
+      getAllMeasurementUnits().then(setMeasurementUnits);
   }, []); 
 
   const handleIngredientChange = (index, field, value) => {
