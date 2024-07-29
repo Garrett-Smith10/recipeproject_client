@@ -6,7 +6,7 @@ import { Home } from "../components/pages/Home.jsx"
 import { MyRecipes } from "../components/pages/MyRecipes.jsx"
 import { RecipeForm } from "../components/pages/AddRecipe.jsx"
 import { RecipeDetails } from "../components/pages/RecipeDetails.jsx"
-
+import { EditRecipe } from "../components/pages/EditRecipe.jsx"
 export const ApplicationViews = ({ token, setToken }) => {
   
   return (
@@ -19,6 +19,7 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/myrecipes" element={<MyRecipes />} />
       <Route path="/addrecipe" element={<RecipeForm />} />
       <Route path="/myrecipes/:id" element={<RecipeDetails />} />
+      <Route path="/edit-recipe/:id" element={<EditRecipe />} />
       
         
         

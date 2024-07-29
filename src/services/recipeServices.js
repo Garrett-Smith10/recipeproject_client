@@ -1,42 +1,45 @@
-export const fetchRecipes = async (setRecipes) => {
-  fetch("http://localhost:8000/recipes", {
+export const fetchRecipes = () => {
+  return fetch("http://localhost:8000/recipes", {
     headers: {
       Authorization: `Token ${localStorage.getItem("auth_token")}`,
       "Content-Type": "application/json",
     },
-  }).then(async (response) => {
-    const data = await response.json();
-    setRecipes(data);
-  });
-};
+  }).then((res) => res.json())
+}
 
-export const fetchSingleRecipe = async (setRecipe, id) => {
-  fetch(`http://localhost:8000/recipes/${id}`, {
+export const fetchSingleRecipe = (id) => {
+  return fetch(`http://localhost:8000/recipes/${id}`, {
     headers: {
       Authorization: `Token ${localStorage.getItem('auth_token')}`,
       "Content-Type": "application/json",
     },
-  }).then(async (response) => {
-    const data = await response.json();
-    setRecipe(data);
-  });
-};
+  }).then((res) => res.json());
+}
 
 
-export async function createRecipe(postData) {
-  const token = localStorage.getItem("auth_token");
 
+export const createRecipe = async (postData) => {
   const formData = new FormData();
   Object.keys(postData).forEach((key) => formData.append(key, postData[key]));
 
   const response = await fetch("http://localhost:8000/recipes", {
     method: "POST",
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Token ${localStorage.getItem("auth_token")}`,
     },
     body: formData,
   });
+  // Parse the JSON response
   return await response.json();
 }
 
-
+export const updateRecipe = (updatedRecipe) => {
+  return fetch(`http://localhost:8000/recipes/${updatedRecipe.id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${localStorage.getItem('auth_token')}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedRecipe),
+  }).then(res => res.json());
+};

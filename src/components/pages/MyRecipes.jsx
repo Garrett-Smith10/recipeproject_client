@@ -7,8 +7,13 @@ export const MyRecipes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchRecipes(setRecipes);
-  }, [setRecipes]);
+    fetchRecipes().then((data) => {
+      setRecipes(data);
+    }).catch(error => {
+      console.error("Failed to fetch recipes:", error);
+      // Handle errors appropriately, maybe show a message to the user
+    });
+  }, []); 
 
   const handleViewRecipe = (id) => {
     navigate(`/myrecipes/${id}`);
