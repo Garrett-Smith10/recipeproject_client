@@ -93,87 +93,112 @@ export const EditRecipe = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={recipe.name}
-          onChange={handleNameChange}
-          required
-        />
-      </label>
-      <label>
-        Image:
-        <input type="file" onChange={handleImageChange} />
-      </label>
-      <div>
-        <h3>Ingredients:</h3>
-        {recipe.ingredients.map((ingredient, index) => (
-          <div key={index}>
-            <label>
-              Ingredient:
-              <input
-                type="text"
-                value={ingredient.ingredient}
-                onChange={(e) =>
-                  handleIngredientChange(index, "ingredient", e.target.value)
-                }
-                required
-              />
-            </label>
-            <label>
-              Quantity:
-              <input
-                type="number"
-                step="0.01"
-                value={ingredient.quantity}
-                onChange={(e) =>
-                  handleIngredientChange(index, "quantity", e.target.value)
-                }
-                required
-              />
-            </label>
-            <label>
-              <select
-                value={ingredient.measurement_unit_id}
-                onChange={(e) =>
-                  handleIngredientChange(
-                    index,
-                    "measurement_unit_id",
-                    e.target.value
-                  )
-                }
-                required
+    <div className="form-container">
+      <h2>Edit Recipe</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="field">
+          <label>Name:</label>
+          <input
+            className="input"
+            type="text"
+            value={recipe.name}
+            onChange={handleNameChange}
+            required
+          />
+        </div>
+        <div className="field">
+          <label>Image:</label>
+          <input
+            className="input"
+            type="file"
+            onChange={handleImageChange}
+          />
+        </div>
+        <div className="ingredients-container">
+          <h3>Ingredients:</h3>
+          {recipe.ingredients.map((ingredient, index) => (
+            <div key={index} className="ingredient-row">
+              <div className="field">
+                <label>Ingredient:</label>
+                <input
+                  className="input"
+                  type="text"
+                  value={ingredient.ingredient}
+                  onChange={(e) =>
+                    handleIngredientChange(index, "ingredient", e.target.value)
+                  }
+                  required
+                />
+              </div>
+              <div className="field">
+                <label>Quantity:</label>
+                <input
+                  className="input"
+                  type="number"
+                  step="0.01"
+                  value={ingredient.quantity}
+                  onChange={(e) =>
+                    handleIngredientChange(index, "quantity", e.target.value)
+                  }
+                  required
+                />
+              </div>
+              <div className="field">
+                <label>Measurement Unit:</label>
+                <div className="select">
+                  <select
+                    className="input"
+                    value={ingredient.measurement_unit_id}
+                    onChange={(e) =>
+                      handleIngredientChange(
+                        index,
+                        "measurement_unit_id",
+                        e.target.value
+                      )
+                    }
+                    required
+                  >
+                    <option value="" disabled>Select Measurement Unit</option>
+                    {measurementUnits.map((unit) => (
+                      <option key={unit.id} value={unit.id}>
+                        {unit.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="button is-danger"
+                onClick={() => removeIngredient(index)}
               >
-                <option value="" disabled>Select Measurement Unit</option>
-                {measurementUnits.map((unit) => (
-                  <option key={unit.id} value={unit.id}>
-                    {unit.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button type="button" onClick={() => removeIngredient(index)}>
-              Remove Ingredient
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={addIngredient}>
-          Add Another Ingredient
-        </button>
-      </div>
-      <label>
-        Cooking Instructions:
-        <textarea
-          value={recipe.cooking_instructions}
-          onChange={handleInstructionChange}
-          required
-        />
-      </label>
-      <div>
-        <button type="submit">Update Recipe</button>
-      </div>
-    </form>
+                Remove Ingredient
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            className="button add-button"
+            onClick={addIngredient}
+          >
+            Add Another Ingredient
+          </button>
+        </div>
+        <div className="field cooking_instructions">
+          <label>Cooking Instructions:</label>
+          <textarea
+            className="textarea"
+            value={recipe.cooking_instructions}
+            onChange={handleInstructionChange}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit" className="button is-primary">
+            Update Recipe
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };

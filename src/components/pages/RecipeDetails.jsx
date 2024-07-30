@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { deleteRecipe, fetchSingleRecipe } from "../../services/recipeServices"; // Assume this function exists
+import "./RecipeDetails.css"
 
 export const RecipeDetails = () => {
   const { id } = useParams();
@@ -26,32 +27,32 @@ export const RecipeDetails = () => {
   };
 
   return (
-    <div>
+    <div className="details-container">
       <h2>{recipe.name}</h2>
       <img
         src={recipe.image}
         alt={recipe.name}
-        style={{ width: "30%", height: "auto" }}
       />
-      <ul>
-        <h3>
-          <strong>Ingredients:</strong>
-        </h3>
-        {recipe?.ingredients?.map((ingredient, index) => (
-          <li key={index}>
-            {ingredient.ingredient}, {ingredient.quantity}{" "}
-            {ingredient.measurement_unit}
-          </li>
-        ))}
-        <p>
-          <strong>Cooking Instructions:</strong>
-        </p>
+      <div className="ingredients-container">
+        <h3><strong>Ingredients:</strong></h3>
+        <ul>
+          {recipe?.ingredients?.map((ingredient, index) => (
+            <li key={index}>
+              {ingredient.ingredient}, {ingredient.quantity} {ingredient.measurement_unit}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="cooking-instructions-container">
+        <p><strong>Cooking Instructions:</strong></p>
         <p>{recipe.cooking_instructions}</p>
-      </ul>
-        <button onClick={handleDelete}>Delete Recipe</button>
-      <Link to={`/edit-recipe/${id}`}>
-        <button>Edit Recipe</button>
-      </Link>
+      </div>
+      <div className="button-container">
+        <button className="delete-button" onClick={handleDelete}>Delete Recipe</button>
+        <Link to={`/edit-recipe/${id}`}>
+          <button className="edit-button">Edit Recipe</button>
+        </Link>
+      </div>
     </div>
   );
 };

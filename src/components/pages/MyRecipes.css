@@ -1,0 +1,71 @@
+/* MyRecipes.css */
+
+.recipes-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipes-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .recipes-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recipe-item {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space between content and button */
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    position: relative; /* Make it relative for button positioning */
+  }
+  
+  .recipe-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem; /* Space between image and text */
+  }
+  
+  .recipe-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .recipe-content {
+    margin-bottom: 2.5rem; /* Space for the button */
+  }
+  
+  .view-recipe-button {
+    background-color: #007bff; /* Primary color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding around text */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove default button styling */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 16px; /* Font size */
+    position: absolute; /* Position it absolutely */
+    bottom: 10px; /* Distance from the bottom */
+    right: 10px; /* Distance from the right */
+    font-weight: bold; /* Bold font weight */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .view-recipe-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
