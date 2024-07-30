@@ -7,6 +7,15 @@ export const fetchRecipes = () => {
   }).then((res) => res.json())
 }
 
+export const publicRecipes = () => {
+  return fetch("http://localhost:8000/recipes?public=true", {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("auth_token")}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
 export const fetchSingleRecipe = (id) => {
   return fetch(`http://localhost:8000/recipes/${id}`, {
     headers: {
@@ -84,5 +93,21 @@ export const updateRecipeWithImage = (updatedRecipe, imageFile) => {
   }).then(() => {
     // Optionally, refresh the recipe details after successful upload
     return fetch(`http://localhost:8000/recipes/${updatedRecipe.id}`).then(res => res.json());
+  });
+};
+
+export const toggleRecipeVisibility = (id) => {
+  return fetch(`http://localhost:8000/recipes/${id}/toggle-public/`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("auth_token")}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (!res.ok) throw new Error('Network response was not ok');
+    console.log(`Recipe ${id} visibility toggled successfully`);
+    // Optionally, refresh the page or navigate away after successful toggle
+  }).catch(error => {
+    console.error("Error toggling recipe visibility:", error);
   });
 };
