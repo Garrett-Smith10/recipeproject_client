@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllMeasurementUnits } from "../../services/measurementService.js";
 import { createRecipe } from "../../services/recipeServices.js";
+import './AddRecipe.css'
 
 export const RecipeForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
@@ -55,87 +56,125 @@ export const RecipeForm = ({ onSubmit }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Image:
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-      </label>
-      <div>
-        <h3>Ingredients:</h3>
-        {ingredients.map((ingredient, index) => (
-          <div key={index}>
-            <label>
-              Ingredient:
-              <input
-                type="text"
-                value={ingredient.ingredient}
-                onChange={(e) =>
-                  handleIngredientChange(index, "ingredient", e.target.value)
-                }
-                required
-              />
-            </label>
-            <label>
-              Quantity:
-              <input
-                type="number"
-                step="0.01"
-                value={ingredient.quantity}
-                onChange={(e) =>
-                  handleIngredientChange(index, "quantity", e.target.value)
-                }
-                required
-              />
-            </label>
-            <label>
-              <select
-                value={ingredient.measurement_unit}
-                onChange={(e) =>
-                  handleIngredientChange(
-                    index,
-                    "measurement_unit",
-                    e.target.value
-                  )
-                }
-                required
-              >
-                <option value="" disabled>Select Measurement Unit</option>
-                {measurementUnits.map((unit) => (
-                  <option key={unit.id} value={unit.id}>
-                    {unit.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button type="button" onClick={() => removeIngredient(index)}>
-              Remove Ingredient
-            </button>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <div className="field is-horizontal">
+          <div className="field-body">
+            <div className="field">
+              <label className="label">Name:</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Image:</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+            </div>
           </div>
-        ))}
-        <button type="button" onClick={addIngredient}>
-          Add Another Ingredient
-        </button>
-      </div>
-      <label>
-        Cooking Instructions:
-        <textarea
-          value={cookingInstructions}
-          onChange={(e) => setCookingInstructions(e.target.value)}
-          required
-        />
-      </label>
-      <div>
-      <button type="submit">Add Recipe</button>
-      </div>
-    </form>
+        </div>
+
+        <div className="ingredients-container">
+          <h3 className="title is-4">Ingredients:</h3>
+          {ingredients.map((ingredient, index) => (
+            <div key={index} className="ingredient-row">
+              <div className="field">
+                <label className="label">Ingredient:</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    value={ingredient.ingredient}
+                    onChange={(e) =>
+                      handleIngredientChange(index, "ingredient", e.target.value)
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Quantity:</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="number"
+                    step="0.01"
+                    value={ingredient.quantity}
+                    onChange={(e) =>
+                      handleIngredientChange(index, "quantity", e.target.value)
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Measurement Unit:</label>
+                <div className="control">
+                  <div className="select">
+                    <select
+                      value={ingredient.measurement_unit}
+                      onChange={(e) =>
+                        handleIngredientChange(
+                          index,
+                          "measurement_unit",
+                          e.target.value
+                        )
+                      }
+                      required
+                    >
+                      <option value="" disabled>Select Measurement Unit</option>
+                      {measurementUnits.map((unit) => (
+                        <option key={unit.id} value={unit.id}>
+                          {unit.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="button is-danger is-light"
+                onClick={() => removeIngredient(index)}
+              >
+                Remove Ingredient
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            className="button green-button"
+            onClick={addIngredient}
+          >
+            Add Another Ingredient
+          </button>
+        </div>
+
+        <div className="cooking_instructions">
+          <label className="label">Cooking Instructions:</label>
+          <div className="control">
+            <textarea
+              className="textarea"
+              value={cookingInstructions}
+              onChange={(e) => setCookingInstructions(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="button is-link">Add Recipe</button>
+      </form>
+    </div>
   );
 };
