@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchSingleRecipe, updateRecipe } from "../../services/recipeServices.js";
+import { fetchSingleRecipe, updateRecipe, updateRecipeWithImage } from "../../services/recipeServices.js";
 import { getAllMeasurementUnits } from "../../services/measurementService.js";
 
 export const EditRecipe = () => {
@@ -85,8 +85,8 @@ export const EditRecipe = () => {
   
     console.log("Updating recipe with:", editedRecipe);
   
-    updateRecipe(editedRecipe).then(() => {
-      navigate(`/myrecipes/${recipe.id}`);
+    await updateRecipeWithImage(editedRecipe, recipe.image).then(() => {
+        navigate(`/myrecipes/${recipe.id}`);
     });
   };
   
