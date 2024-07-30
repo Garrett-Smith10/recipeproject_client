@@ -31,7 +31,26 @@ export const createRecipe = async (postData) => {
   });
   // Parse the JSON response
   return await response.json();
+
 }
+
+export const deleteRecipe = async (id) => {
+  try {
+    await fetch(`http://localhost:8000/recipes/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${localStorage.getItem("auth_token")}`
+      },
+    }).then((response) => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      console.log(`Recipe ${id} deleted successfully`);
+      // Optionally, refresh the page or navigate away after successful deletion
+    });
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+  }
+};
 
 export const updateRecipe = (updatedRecipe) => {
   return fetch(`http://localhost:8000/recipes/${updatedRecipe.id}`, {
