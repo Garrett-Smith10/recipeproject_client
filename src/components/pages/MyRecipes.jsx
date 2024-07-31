@@ -9,6 +9,7 @@ export const MyRecipes = () => {
 
   useEffect(() => {
     fetchRecipes().then((data) => {
+      console.log("Fetched recipes with public status:", data)
       setRecipes(data);
     }).catch(error => {
       console.error("Failed to fetch recipes:", error);
@@ -16,9 +17,9 @@ export const MyRecipes = () => {
     });
   }, []); 
 
-  const handleToggleVisibility = async (id) => {
+  const handleToggleVisibility = async (id, isChecked) => {
     try {
-      await toggleRecipeVisibility(id);
+      await toggleRecipeVisibility(id, isChecked);
       // Optionally, refresh the list of recipes after toggling visibility
       fetchRecipes().then(setRecipes);
     } catch (error) {
