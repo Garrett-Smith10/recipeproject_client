@@ -92,7 +92,11 @@ export const updateRecipeWithImage = (updatedRecipe, imageFile) => {
     return uploadImage(imageFile, updatedRecipe.id);
   }).then(() => {
     // Optionally, refresh the recipe details after successful upload
-    return fetch(`http://localhost:8000/recipes/${updatedRecipe.id}`).then(res => res.json());
+    return fetch(`http://localhost:8000/recipes/${updatedRecipe.id}`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`, 
+      }
+    }).then(res => res.json());
   });
 };
 

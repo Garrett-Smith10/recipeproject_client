@@ -14,14 +14,22 @@ export const NavBar = ({ token, setToken }) => {
   }
 
   return (
-    <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-primary mb-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-           <h1 className="title is-4"></h1>
+          <h1 className="title is-4">Strudel</h1>
         </a>
 
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
+        <a
+          role="button"
+          className="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+          onClick={showMobileNavbar}
+          ref={hamburger}
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -30,59 +38,27 @@ export const NavBar = ({ token, setToken }) => {
 
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
-          {
-            token
-              ?
-              <Link to="/" className="navbar-item">Home</Link>
-              :
-              ""
-          }
-           {
-            token
-              ?
-              <Link to="/myrecipes" className="navbar-item">My Recipes</Link>
-              :
-              ""
-          }
-          {
-            token
-              ?
-              <Link to="/addrecipe" className="navbar-item">Add Recipe</Link>
-              :
-              ""
-          }
-          {
-            token
-              ?
-              <Link to="/categories" className="navbar-item">Category Manager</Link>
-              :
-              ""
-          }
-          {
-            token
-              ?
-              <Link to="/tags" className="navbar-item">Tag Manager</Link>
-              :
-              ""
-          }
+          {token && <Link to="/" className="navbar-item">Home</Link>}
+          {token && <Link to="/myrecipes" className="navbar-item">My Recipes</Link>}
+          {token && <Link to="/addrecipe" className="navbar-item">Add Recipe</Link>}
+          {token && <Link to="/grocerylist" className="navbar-item">Grocery List</Link>}
         </div>
 
         <div className="navbar-end">
+          {token && <Link to="/profile" className="navbar-item">Profile</Link>}
           <div className="navbar-item">
             <div className="buttons">
-              {
-                token
-                  ?
-                  <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    navigate('/login')
-                  }}>Logout</button>
-                  :
-                  <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
-                  </>
-              }
+              {token ? (
+                <button className="button is-light" onClick={() => {
+                  setToken('');
+                  navigate('/login');
+                }}>Logout</button>
+              ) : (
+                <>
+                  <Link to="/register" className="button is-link">Register</Link>
+                  <Link to="/login" className="button is-light">Login</Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,4 +1,18 @@
-.navbar-item img {
-    max-height: 3rem;
- }
- 
+/* Additional custom styling for NavBar */
+.navbar-item .title {
+    font-family: 'Pacifico', cursive;
+    color: white;
+}
+
+.navbar-burger {
+    color: white;
+}
+
+.navbar-menu.is-active {
+    display: block;
+}
+
+.navbar-end .button {
+    margin-left: 10px;
+}
+

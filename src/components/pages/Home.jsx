@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { publicRecipes } from '../../services/recipeServices.js';
+import './Home.css'
 
 export const Home = () => {
     // State to store the recipes
@@ -16,25 +17,25 @@ export const Home = () => {
     }, []); 
 
     return (
-        <div>
-            {/* Display "Strudel" with a cool font */}
-            <h1 style={{ fontFamily: "'Pacifico', cursive", fontSize: '48px', textAlign: 'center', marginBottom: '20px' }}>Strudel</h1>
-
-            {/* Render the list of public recipes */}
-            <ul>
+      <div className="home-container">
+            <h1 className="title is-1 has-text-centered">Welcome to Strudel!</h1>
+            <ul className="recipe-list">
                 {recipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <h2>{recipe.name}</h2>
-                        <img src={recipe.image} alt={recipe.name} style={{ width: '200px', height: 'auto' }} />
-                        <p>{recipe.cooking_instructions.substring(0, 100)}...</p>
-                        {/* Additional attributes */}
-                        <p><strong>Ingredients:</strong></p>
-                        <ul>
-                            {recipe.ingredients.map(ingredient => (
-                                <li key={ingredient.ingredient}>{ingredient.ingredient}: {ingredient.quantity} {ingredient.measurement_unit}</li>
-                            ))}
-                        </ul>
-                        {/* Add more details as needed */}
+                    <li key={recipe.id} className="recipe-card box">
+                        <div className="columns">
+                            <div className="column is-one-third">
+                                <img src={recipe.image} alt={recipe.name} className="recipe-image" />
+                            </div>
+                            <div className="column">
+                                <h2 className="title is-4">{recipe.name}</h2>
+                                <p><strong>Ingredients:</strong></p>
+                                <ul>
+                                    {recipe.ingredients.map((ingredient, index) => (
+                                        <li key={index}>{ingredient.ingredient}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ul>
