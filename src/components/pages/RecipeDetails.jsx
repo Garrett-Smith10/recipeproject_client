@@ -18,7 +18,6 @@ export const RecipeDetails = () => {
     if (window.confirm("Are you sure you want to delete this recipe?")) {
       try {
         await deleteRecipe(id); 
-        console.log(`Recipe ${id} deleted successfully`);
         navigate('/myrecipes'); 
       } catch (error) {
         console.error("Error deleting recipe:", error);

@@ -1,0 +1,34 @@
+.box {
+    padding: 2rem;
+  }
+  
+  .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-content {
+    flex-grow: 1;
+  }
+  
+  .input.is-small {
+    max-width: 200px;
+  }
+  
+  .field.has-text-centered {
+    text-align: center;
+  }
+  
+  .columns.is-multiline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .column.is-one-quarter {
+    display: flex;
+    justify-content: center;
+  }
+  

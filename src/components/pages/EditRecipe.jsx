@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchSingleRecipe, updateRecipe, updateRecipeWithImage } from "../../services/recipeServices.js";
+import { fetchSingleRecipe, updateRecipeWithImage } from "../../services/recipeServices.js";
 import { getAllMeasurementUnits } from "../../services/measurementService.js";
 
 export const EditRecipe = () => {
@@ -18,7 +18,6 @@ export const EditRecipe = () => {
   useEffect(() => {
       // when a promise is fulfilled the .then() is invoked with a callback function as its argument
       fetchSingleRecipe(id).then((data) => {
-        
           //this declares a constant variable "lessonObj" that accesses the first element (index 0) of the "data" array
           setRecipe(data)
         });
@@ -82,8 +81,6 @@ export const EditRecipe = () => {
       cooking_instructions: recipe.cooking_instructions,
       ingredients: flattenedIngredients, // Directly use the array
     };
-  
-    console.log("Updating recipe with:", editedRecipe);
   
     await updateRecipeWithImage(editedRecipe, recipe.image).then(() => {
         navigate(`/myrecipes/${recipe.id}`);

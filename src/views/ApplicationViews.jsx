@@ -7,6 +7,9 @@ import { MyRecipes } from "../components/pages/MyRecipes.jsx"
 import { RecipeForm } from "../components/pages/AddRecipe.jsx"
 import { RecipeDetails } from "../components/pages/RecipeDetails.jsx"
 import { EditRecipe } from "../components/pages/EditRecipe.jsx"
+import { GroceryList } from "../components/pages/GroceryLists.jsx"
+import { CreateGroceryList } from "../components/pages/CreateGroceryList.jsx"
+import { GroceryListDetails } from "../components/pages/GroceryListDetails.jsx"
 export const ApplicationViews = ({ token, setToken }) => {
   
   return (
@@ -20,6 +23,10 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/addrecipe" element={<RecipeForm />} />
       <Route path="/myrecipes/:id" element={<RecipeDetails />} />
       <Route path="/edit-recipe/:id" element={<EditRecipe />} />
+      <Route path="/grocerylist" element={<GroceryList />} />
+      <Route path="/recipelist" element={<CreateGroceryList />} />
+      <Route path="/viewgrocerylist/:id" element={<GroceryListDetails />} />
+      
       
         
         
