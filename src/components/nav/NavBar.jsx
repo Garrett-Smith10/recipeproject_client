@@ -14,7 +14,7 @@ export const NavBar = ({ token, setToken }) => {
   }
 
   return (
-    <nav className="navbar is-primary mb-3" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-dark mb-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
           <h1 className="title is-4">Strudel</h1>

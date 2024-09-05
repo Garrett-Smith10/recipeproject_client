@@ -1,0 +1,51 @@
+/* Home.css */
+.home-container {
+    padding: 20px;
+}
+
+.recipe-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-list .recipe-card {
+    background-color: #36363f; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: white; /* Adjust text color for contrast */
+}
+
+.recipe-card .recipe-info {
+    background-color: #b5b5be; /* Lighter green color */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.title.is-1.has-text-centered {
+    color: #36363f; /* Bulma's is-success color */
+}
+
+.recipe-card .title {
+    color: white; /* Recipe title color */
+}
+
+.recipe-card h2 {
+    color: white; /* Recipe title color */
+}
+
+.recipe-card p strong {
+    color: white; /* Ingredients title color */
+}
+
+.recipe-card ul {
+    color: white; /* Ingredients list color */
+}

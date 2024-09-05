@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { publicRecipes } from '../../services/recipeServices.js';
-import './Home.css'
+import './Home.css';
 
 export const Home = () => {
     // State to store the recipes
@@ -8,16 +8,16 @@ export const Home = () => {
 
     // Fetch public recipes when the component mounts
     useEffect(() => {
-      publicRecipes().then((data) => {
-        setRecipes(data);
-      }).catch(error => {
-        console.error("Failed to fetch recipes:", error);
-        // Handle errors appropriately, maybe show a message to the user
-      });
-    }, []); 
+        publicRecipes().then((data) => {
+            setRecipes(data);
+        }).catch(error => {
+            console.error("Failed to fetch recipes:", error);
+            // Handle errors appropriately, maybe show a message to the user
+        });
+    }, []);
 
     return (
-      <div className="home-container">
+        <div className="home-container">
             <h1 className="title is-1 has-text-centered">Welcome to Strudel!</h1>
             <ul className="recipe-list">
                 {recipes.map(recipe => (
@@ -27,13 +27,15 @@ export const Home = () => {
                                 <img src={recipe.image} alt={recipe.name} className="recipe-image" />
                             </div>
                             <div className="column">
-                                <h2 className="title is-4">{recipe.name}</h2>
-                                <p><strong>Ingredients:</strong></p>
-                                <ul>
-                                    {recipe.ingredients.map((ingredient, index) => (
-                                        <li key={index}>{ingredient.ingredient}</li>
-                                    ))}
-                                </ul>
+                                <div className="recipe-info">
+                                    <h2 className="title is-4">{recipe.name}</h2>
+                                    <p><strong>Ingredients:</strong></p>
+                                    <ul>
+                                        {recipe.ingredients.map((ingredient, index) => (
+                                            <li key={index}>{ingredient.ingredient}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </li>
