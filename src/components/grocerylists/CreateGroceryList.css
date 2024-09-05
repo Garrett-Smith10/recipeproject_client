@@ -1,33 +1,36 @@
 .box {
     padding: 2rem;
-  }
-  
-  .card {
+}
+
+.card {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  
-  .card-content {
+}
+
+.card-content {
     flex-grow: 1;
-  }
-  
-  .input.is-small {
+}
+
+.input.is-small {
     max-width: 200px;
-  }
-  
-  .field.has-text-centered {
+    margin-bottom: 1em;
+}
+
+.field.has-text-centered {
     text-align: center;
-  }
-  
-  .columns.is-multiline {
+}
+
+.columns.is-multiline {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  
-  .column.is-one-quarter {
+    background-color: #b5b5be;
+    border-radius: 10px;
+}
+
+.column.is-one-quarter {
     display: flex;
     justify-content: center;
   }

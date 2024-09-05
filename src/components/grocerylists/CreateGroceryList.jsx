@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchRecipes } from '../../services/recipeServices.js';
 import { createGroceryList } from '../../services/groceryServices.js';
-import './CreateGroceryList.css'; // Import the CSS file
+import './CreateGroceryList.css'; 
 
 export const CreateGroceryList = ({ onSubmit }) => {
   const [selectedRecipes, setSelectedRecipes] = useState([]);

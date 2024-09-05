@@ -4,7 +4,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
-    background: #f9f9f9;
+    background: #36363f;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -12,8 +12,8 @@
   .recipes-container h2 {
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 2rem;
-    color: #333;
+    font-size: rem;
+    color: white;
   }
   
   .recipes-list {
@@ -68,4 +68,6 @@
   .view-recipe-button:hover {
     background-color: #0056b3; /* Darker shade on hover */
   }
+
+  
   

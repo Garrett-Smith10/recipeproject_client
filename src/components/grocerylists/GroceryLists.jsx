@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchGroceryLists } from "../../services/groceryServices";
+import { fetchGroceryLists } from "../../services/groceryServices.js";
 import { useNavigate } from "react-router-dom";
 import "./GroceryLists.css"; // Import the CSS file
 import { deleteGroceryList } from "../../services/groceryServices.js";
@@ -11,12 +11,8 @@ export const GroceryList = () => {
   useEffect(() => {
     fetchGroceryLists()
       .then((data) => {
-        console.log("Fetched grocery lists:", data);
         setGroceryLists(data);
       })
-      .catch((error) => {
-        console.error("Failed to fetch grocery lists:", error);
-      });
   }, []);
 
   const handleDelete = async (id) => {
@@ -24,7 +20,6 @@ export const GroceryList = () => {
       await deleteGroceryList(id); // Attempt to delete the grocery list
       fetchGroceryLists().then((data) => {
         // Re-fetch the grocery lists
-        console.log("Fetched grocery lists:", data);
         setGroceryLists(data); // Update the state with the new data
       });
     }
@@ -34,7 +29,7 @@ export const GroceryList = () => {
     <div className="container">
       <h2 className="title is-3 has-text-centered mb-5">Grocery Lists</h2>
       <button
-        className="button is-primary mb-5"
+        className="button is-dark mb-5"
         onClick={() => navigate("/recipelist")}
       >
         Create Grocery List

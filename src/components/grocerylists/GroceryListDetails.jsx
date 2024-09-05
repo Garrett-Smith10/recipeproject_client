@@ -25,7 +25,7 @@ export const GroceryListDetails = () => {
 
   return (
     <div className="details-container box">
-      <h2 className="title is-3 has-text-centered">{groceryListDetails.name}</h2>
+      <div className="title is-3 has-text-centered">{groceryListDetails.name}</div>
       <ul className="list is-hoverable">
         {groceryListDetails.items.map((item) => (
           <li key={item.id} className="list-item">
